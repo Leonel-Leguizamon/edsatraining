@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
 public class ResponseFormatter {
 
@@ -34,9 +35,14 @@ public class ResponseFormatter {
     }
 
     private static String jsonPrettier(String plainResponse){
-        Gson gsonLib = new GsonBuilder().setPrettyPrinting().create();
-        JsonElement jsonElement = JsonParser.parseString(plainResponse);
-        return gsonLib.toJson(jsonElement);
+        try {
+            Gson gsonLib = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement jsonElement = JsonParser.parseString(plainResponse);
+            return gsonLib.toJson(jsonElement);
+        } catch (JsonSyntaxException e) {
+            System.err.println(plainResponse);
+            return "";
+        }
     }
     
 }
