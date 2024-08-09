@@ -71,7 +71,7 @@ public class ServicesController {
         }
     }
 
-    @GetMapping("/list")
+    @GetMapping("")
     public ResponseEntity getAllServices() {
         return ResponseEntity.ok(
             servicesService.getAllServices()
