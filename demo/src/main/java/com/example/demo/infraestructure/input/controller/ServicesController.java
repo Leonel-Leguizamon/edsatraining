@@ -58,7 +58,7 @@ public class ServicesController {
             if (licensePlate != null){
                 assertLicensePlateFormat.run(licensePlate);
             } else {
-                return ResponseEntity.internalServerError().body("License plate can't be null");
+                return ResponseEntity.internalServerError().body("{\"message\": \"License plate can't be null\"}");
             } 
             return ResponseEntity.ok(
                 ServicesMapper.entityToDto(        
@@ -67,7 +67,9 @@ public class ServicesController {
                 )
             );
         } catch (Throwable t) {
-            return ResponseEntity.internalServerError().body(t.getMessage());
+            return ResponseEntity.internalServerError().body(
+                "{\"message\": \"" + t.getMessage() + "\"}"
+            );
         }
     }
 
@@ -99,7 +101,9 @@ public class ServicesController {
                     )
                 );
             } catch (Throwable t) {
-                return ResponseEntity.internalServerError().body(t.getMessage());
+                return ResponseEntity.internalServerError().body(
+                    "{\"message\": \"" + t.getMessage() + "\"}"
+                );
             }
         } else {
             //in case that the client want update other fields, then we proceed as usual
@@ -112,7 +116,7 @@ public class ServicesController {
                 ));
             } catch (Throwable t) {
                 return ResponseEntity.internalServerError().body(
-                    t.getMessage()
+                    "{\"message\": \"" + t.getMessage() + "\"}"
                 );
             }
         }
@@ -122,10 +126,10 @@ public class ServicesController {
     public ResponseEntity deleteService(@PathVariable Integer serviceId){
         try {
             servicesService.deleteService(serviceId);
-            return ResponseEntity.ok("Succesfully deleted");
+            return ResponseEntity.ok("{\"message\": \"Succesfully deleted\"}");
         } catch (Throwable t) {
             return ResponseEntity.internalServerError().body(
-                t.getMessage()
+                "{\"message\": \"" + t.getMessage() + "\"}"
             );
         }
     }

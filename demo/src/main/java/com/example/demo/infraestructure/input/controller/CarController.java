@@ -48,7 +48,9 @@ public class CarController {
             CarDto returnCar = CarMapper.mapToDto(savedCar);
             return ResponseEntity.ok(returnCar);
         } catch (Throwable t) {
-            return ResponseEntity.internalServerError().body(t.getMessage());
+            return ResponseEntity.internalServerError().body(
+                "{\"message\": \"" + t.getMessage() + "\"}"
+            );
         }
     }
 
@@ -69,7 +71,9 @@ public class CarController {
             CarEntity savedCar =  carService.saveCar(CarMapper.mapToEntity(newCar));
             return ResponseEntity.ok(CarMapper.mapToDto(savedCar));    
         } catch (Throwable t) {
-            return ResponseEntity.internalServerError().body(t.getMessage());
+            return ResponseEntity.internalServerError().body(
+                "{\"message\": \"" + t.getMessage() + "\"}"
+            );
         }
     }
 
@@ -80,7 +84,9 @@ public class CarController {
             CarEntity updatedCar = carService.updateCar(licensePlate, CarMapper.mapToEntity(carDto));
             return ResponseEntity.ok(CarMapper.mapToDto(updatedCar));
         } catch (Throwable t) {
-            return ResponseEntity.internalServerError().body(t.getMessage());
+            return ResponseEntity.internalServerError().body(
+                "{\"message\": \"" + t.getMessage() + "\"}"
+            );
         }
     }
 
@@ -88,9 +94,11 @@ public class CarController {
     public ResponseEntity deleteCar(@PathVariable String licensePlate) throws CarNotExistsException{
         try {
             carService.deleteCar(licensePlate);
-            return ResponseEntity.ok().body("Succesfully deleted");
+            return ResponseEntity.ok().body("{\"message\": \"Succesfully deleted\"}");
         } catch (Throwable t){
-            return ResponseEntity.internalServerError().body(t.getMessage());
+            return ResponseEntity.internalServerError().body(
+                "{\"message\": \"" + t.getMessage() + "\"}"
+            );
         }
     }
     
