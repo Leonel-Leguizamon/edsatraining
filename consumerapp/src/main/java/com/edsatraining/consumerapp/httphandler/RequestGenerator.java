@@ -14,6 +14,7 @@ public class RequestGenerator {
             connection.setRequestMethod(method);
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("x-api-key", "test-token");
             connection.setDoOutput(true);
             connection.connect();
             return connection;
