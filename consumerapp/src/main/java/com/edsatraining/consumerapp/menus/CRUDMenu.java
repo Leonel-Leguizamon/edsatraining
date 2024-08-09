@@ -8,18 +8,18 @@ public abstract class CRUDMenu {
     
     public void initMenu(){
         Scanner sn = new Scanner(System.in);
-        boolean salir = false;
-        int opcion;
-        while (!salir) {
+        boolean exit = false;
+        int option;
+        while (!exit) {
             listOptions();
             System.out.println("6. Exit");
  
             try {
  
                 System.out.println("Choose an option");
-                opcion = sn.nextInt();
+                option = sn.nextInt();
  
-                switch (opcion) {
+                switch (option) {
                     case 1:
                         requestOne();
                         break;
@@ -36,13 +36,13 @@ public abstract class CRUDMenu {
                         delete();
                         break;
                     case 6:
-                        salir = true;
+                        exit = true;
                         break;
                     default:
-                        System.out.println("Solo números entre 1 y 6");
+                        System.out.println("Only numbers between 1 and 6");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Debes insertar un número");
+                System.out.println("You must insert a number");
                 sn.next();
             }
         }

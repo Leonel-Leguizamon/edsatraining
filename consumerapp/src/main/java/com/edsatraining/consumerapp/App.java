@@ -16,10 +16,10 @@ public class App
     public static void main( String[] args ) throws IOException
     {
         Scanner sn = new Scanner(System.in);
-        boolean salir = false;
-        int opcion; //Guardaremos la opcion del usuario
+        boolean exit = false;
+        int option;
  
-        while (!salir) {
+        while (!exit) {
             System.out.println("1. CRUD Car");
             System.out.println("2. CRUD Services");
             System.out.println("3. Exit");
@@ -27,26 +27,25 @@ public class App
             try {
  
                 System.out.println("Choose an option");
-                opcion = sn.nextInt();
+                option = sn.nextInt();
  
-                switch (opcion) {
+                switch (option) {
                     case 1:
                         CRUDCarMenu crudCarMenu = new CRUDCarMenu();
                         crudCarMenu.initMenu();
                         break;
                     case 2:
-                        System.out.println("Has seleccionado la opcion 2");
                         CRUDServicesMenu servicesMenu = new CRUDServicesMenu();
                         servicesMenu.initMenu();
                         break;
                     case 3:
-                        salir = true;
+                        exit = true;
                         break;
                     default:
-                        System.out.println("Solo números entre 1 y 3");
+                        System.out.println("Choose a number between 1 and 3");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Debes insertar un número");
+                System.out.println("Must insert a number");
                 sn.next();
             }
         }
